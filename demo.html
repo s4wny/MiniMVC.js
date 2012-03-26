@@ -3,10 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>MiniMVC test page</title>
+	
+	
+	<!-- Load jQuery -->
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+	
+	<!-- Load MiniMVC.js -->
 	<script type="text/javascript" src="https://raw.github.com/s4wny/MiniMVC.js/master/MiniMVC.js"></script>
 	
-	<!-- jQuery -->
-    <script type="text/javascript" src="jquery/jquery.js"></script>
+	
+	<!-- Syntax thing is just for the demo -->
 	
 	<!-- Syntax highlighting -->
 	<script type="text/javascript" src="syntaxhighlight/scripts/shCore.js"></script>
@@ -55,6 +61,22 @@
 	
 	    <div class="space"></div>
 		
+		
+	    <h1>Test</h1>
+		<p>x</p>
+		
+		<div id="peopleTest" style="border: 1px solid black;">
+		
+		</div>
+		
+	    <script type="text/javascript">
+            people = MiniMVC.load.model('fakePeopleDb');
+            
+			someHtml = MiniMVC.load.view('peopleWidget', people);
+			$("#peopleTest").html(someHtml);
+        </script>
+	
+	    <div class="space"></div>
 		
 		<!--<h1>x</h1>
 		<p>x</p>
