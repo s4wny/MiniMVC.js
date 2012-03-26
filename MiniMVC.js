@@ -7,12 +7,15 @@
  *     MiniMVC.load 
  *
  * @todo Not jQuery independent
- * @todo cache
+ * @todo cache in MiniMVC.load.view to local storage
  */
  
  
 (function() {
 
+    i = 0;
+    console.log("Debug: "+i); i++;
+	
     MiniMVC     = {};
 	MiniMVC.ini = {};
 	MiniMVC.ini.basePath = '';
@@ -27,17 +30,33 @@
     MiniMVC.load = function() {};
     
     /**
-     * 
+     * View
      */
     MiniMVC.load.view = function(view) {
 	    $.get(MiniMVC.ini.basePath +'view/'+ view, function(data) {
 		    console.log(data);
-			console.log(tmlp);
-			console.log(tmlp(data));
+			console.log(tmpl);
+			console.log(tmpl(data));
+			
+			//return tmpl(data);
+		});
+	}
+	
+	
+    /**
+     * Model
+     */
+    MiniMVC.load.model = function(model) {
+	    $.get(MiniMVC.ini.basePath +'model/'+ model, function(data) {
+		    console.log(data);
+            console.log(eval(data));
+			
+			//return eval(data);
 		});
 	}
       
     
+	console.log("Debug: "+i); i++;
     
     //------------------------------------------------------------
     // Private helpers
@@ -79,9 +98,11 @@
       return data ? fn( data ) : fn;
     };
     
-    
+    console.log("Debug: "+i); i++;
     //Jailbreak
     window.MiniMVC = {
         'load' : MiniMVC.load
     };
+	
+	console.log("Debug: "+i); i++;
 })();
