@@ -17,6 +17,7 @@
     MiniMVC                = {};
 	MiniMVC.ini            = {};
 	MiniMVC.priv           = {};
+	MiniMVC.ini.template   = {};
 	
 	//Settings
 	MiniMVC.ini.basePath   = '';
