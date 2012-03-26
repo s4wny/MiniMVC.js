@@ -12,13 +12,19 @@
  
  
 (function() {
-
-    i = 0;
-    console.log("Debug: "+i); i++;
+    
 	
-    MiniMVC     = {};
-	MiniMVC.ini = {};
-	MiniMVC.ini.basePath = '';
+    MiniMVC                = {};
+	MiniMVC.ini            = {};
+	MiniMVC.priv           = {};
+	
+	//Settings
+	MiniMVC.ini.basePath   = '';
+	MiniMVC.ini.modelSufix = '.js';
+	MiniMVC.ini.viewSufix  = '.html';
+	
+    MiniMVC.ini.template.openTag  = '<%';
+    MiniMVC.ini.template.closeTag = '%>';
 	
     
 	//TODO, template tags option.
@@ -33,12 +39,12 @@
      * View
      */
     MiniMVC.load.view = function(view) {
-	    $.get(MiniMVC.ini.basePath +'view/'+ view, function(data) {
+	    $.get(MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, function(data) {
 		    console.log(data);
-			console.log(tmpl);
-			console.log(tmpl(data));
+			console.log(MiniMVC.priv.tmpl);
+			console.log(MiniMVC.priv.tmpl(data));
 			
-			//return tmpl(data);
+			return MiniMVC.priv.tmpl(data);
 		});
 	}
 	
@@ -47,28 +53,27 @@
      * Model
      */
     MiniMVC.load.model = function(model) {
-	    $.get(MiniMVC.ini.basePath +'model/'+ model, function(data) {
+	    $.get(MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, function(data) {
 		    console.log(data);
             console.log(eval(data));
 			
-			//return eval(data);
+			return eval(data);
 		});
 	}
       
     
-	console.log("Debug: "+i); i++;
-    
+	
     //------------------------------------------------------------
-    // Private helpers
+    // Template system
     //------------------------------------------------------------
-    
-    // Big thanks for this code! <3
+	
+	// Big thanks for this code! <3
     // Simple JavaScript Templating
     // --------------------------------------
     // John Resig - http://ejohn.org/ - MIT Licensed
     var cache = {};
     
-    this.tmpl = function tmpl(str, data){
+    MiniMVC.priv.tmpl = function tmpl(str, data){
       // Figure out if we're getting a template, or if we need to
       // load the template - and be sure to cache the result.
       var fn = !/\W/.test(str) ?
@@ -86,11 +91,11 @@
           // Convert the template into pure JavaScript
           str
             .replace(/[\r\t\n]/g, " ")
-            .split("<%").join("\t")
+            .split(MiniMVC.ini.template.openTag).join("\t")
             .replace(/((^|%>)[^\t]*)'/g, "$1\r")
             .replace(/\t=(.*?)%>/g, "',$1,'")
             .split("\t").join("');")
-            .split("%>").join("p.push('")
+            .split(MiniMVC.ini.template.closeTag).join("p.push('")
             .split("\r").join("\\'")
         + "');}return p.join('');");
       
@@ -98,11 +103,14 @@
       return data ? fn( data ) : fn;
     };
     
-    console.log("Debug: "+i); i++;
-    //Jailbreak
-    window.MiniMVC = {
-        'load' : MiniMVC.load
-    };
 	
-	console.log("Debug: "+i); i++;
+	
+    //------------------------------------------------------------
+    // Private helpers
+    //------------------------------------------------------------
+
+        
+    //Jailbreak
+    window.MiniMVC = MiniMVC;
+	
 })();
