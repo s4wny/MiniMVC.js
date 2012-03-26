@@ -38,8 +38,10 @@
     /**
      * View
      */
-    MiniMVC.load.view = function(view) {
+    MiniMVC.load.view = function(view, varz) {
 	    $.get(MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, function(data) {
+		    console.log(varz);
+		    console.log(eval(varz));
 		    console.log(data);
 			console.log(MiniMVC.priv.tmpl);
 			console.log(MiniMVC.priv.tmpl(data));
