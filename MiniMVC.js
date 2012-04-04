@@ -6,7 +6,6 @@
  * @example 
  *     MiniMVC.load 
  *
- * @todo Not jQuery independent
  * @todo cache in MiniMVC.load.view to local storage
  */
  
@@ -42,13 +41,15 @@
     MiniMVC.load.view = function(view, varz) {
 	    varz = (typeof varz == undefined) ? {} : varz;
 	
-	    $.get(MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, function(data) {
-		    console.log(varz);
-			console.log(MiniMVC.priv.tmpl(data)());
-			console.log(MiniMVC.priv.tmpl(data, varz)());
-			
-			return MiniMVC.priv.tmpl(data, varz)();
-		});
+	    ajax.open(MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, "GET", false);
+		ajax.send();
+		data = ajax.responseText;
+		
+	    console.log(varz);
+		console.log(MiniMVC.priv.tmpl(data)());
+		console.log(MiniMVC.priv.tmpl(data, varz)());
+		
+		return MiniMVC.priv.tmpl(data, varz)();
 	}
 	
 	
@@ -56,13 +57,16 @@
      * Model
      */
     MiniMVC.load.model = function(model) {
-	    $.get(MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, function(data) {
-		    console.log(data);
-			model = new Function(data);
-			console.log(model);
-			console.log(model());
-			return model();
-		});
+	    ajax.open(MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, "GET", false);
+		ajax.send();
+		data = ajax.responseText;
+	   
+	    console.log(data);
+		model = new Function(data);
+		console.log(model);
+		console.log(model());
+		
+		return model();
 	}
       
     
@@ -113,6 +117,8 @@
     // Private helpers
     //------------------------------------------------------------
 
+	ajax = new XMLHttpRequest(); //Ajax object
+  
         
     //Jailbreak
     window.MiniMVC = MiniMVC;
