@@ -46,6 +46,11 @@
 			
 			SyntaxHighlighter.all();
 		});
+		
+		/////////////////////////
+		// MiniMVC.js settings //
+		/////////////////////////
+		MiniMVC.ini.basePath = "js/";
 	</script>
 	
 </head>
@@ -55,8 +60,8 @@
 		<p>Texta är en textlig konst. Testa själv att texta med textil.... ..</p>
 		
 	    <script type="text/javascript">
-            console.log("Hai!");
-			console.log(MiniMVC);
+console.log("Hai!");
+console.log(MiniMVC);
         </script>
 	
 	    <div class="space"></div>
@@ -70,10 +75,10 @@
 		</div>
 		
 	    <script type="text/javascript">
-            people = MiniMVC.load.model('fakePeopleDb');
-            
-			someHtml = MiniMVC.load.view('peopleWidget', people);
-			$("#peopleTest").html(someHtml);
+people = MiniMVC.load.model('fakePeopleDb');
+
+someHtml = MiniMVC.load.view('peopleWidget', people);
+$("#peopleTest").html(someHtml);
         </script>
 	
 	    <div class="space"></div>
