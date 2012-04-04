@@ -57,7 +57,11 @@
      */
     MiniMVC.load.model = function(model) {
 	    $.get(MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, function(data) {
-			return eval(data);
+		    console.log(data);
+			model = new Function(data);
+			console.log(model);
+			console.log(model());
+			return model();
 		});
 	}
       
