@@ -15,6 +15,3 @@ model.get.allPeople = function() {
 model.get.people = function(id) {
     return people[id];
 }
-
-//All models MUST return their functions
-return model;
