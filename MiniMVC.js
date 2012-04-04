@@ -66,7 +66,7 @@
 		console.log(model);
 		console.log(model());
 		
-		return model();
+		return model;
 	}
       
     
