@@ -40,14 +40,14 @@
      * View
      */
     MiniMVC.load.view = function(view, varz) {
+	    varz = (typeof varz == undefined) ? {} : varz;
+	
 	    $.get(MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, function(data) {
 		    console.log(varz);
-		    console.log(eval(varz));
-		    console.log(data);
-			console.log(MiniMVC.priv.tmpl);
-			console.log(MiniMVC.priv.tmpl(data));
+			console.log(MiniMVC.priv.tmpl(data)());
+			console.log(MiniMVC.priv.tmpl(data, varz)());
 			
-			return MiniMVC.priv.tmpl(data);
+			return MiniMVC.priv.tmpl(data, varz)();
 		});
 	}
 	
@@ -57,9 +57,6 @@
      */
     MiniMVC.load.model = function(model) {
 	    $.get(MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, function(data) {
-		    console.log(data);
-            console.log(eval(data));
-			
 			return eval(data);
 		});
 	}
