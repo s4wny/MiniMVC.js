@@ -41,7 +41,7 @@
     MiniMVC.load.view = function(view, varz) {
 	    varz = (typeof varz == undefined) ? {} : varz;
 	
-	    ajax.open(MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, "GET", false);
+	    ajax.open("GET", MiniMVC.ini.basePath +'view/'+ view + MiniMVC.ini.viewSufix, false);
 		ajax.send();
 		data = ajax.responseText;
 		
@@ -57,7 +57,7 @@
      * Model
      */
     MiniMVC.load.model = function(model) {
-	    ajax.open(MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, "GET", false);
+	    ajax.open("GET", MiniMVC.ini.basePath +'model/'+ model + MiniMVC.ini.modelSufix, false);
 		ajax.send();
 		data = ajax.responseText;
 	   
